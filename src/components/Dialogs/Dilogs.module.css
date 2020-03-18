@@ -10,12 +10,18 @@
     padding: 10px;
 }
 
-.dialogsItems .active {
+.dialog img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+.active {
     color: gold;
 }
 
 .dialog {
-
+    text-decoration: none;
 }
 
 .messages {
@@ -23,5 +29,5 @@
 }
 
 .messages .message {
-
+    padding: 25px;
 }

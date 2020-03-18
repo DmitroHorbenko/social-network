@@ -2,7 +2,8 @@ import React from "react";
 // import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
     return (
         <div>
             My posts
@@ -11,8 +12,7 @@ const MyPosts = () => {
                 <button>Add</button>
             </div>
             <div className='posts'>
-                <Post messages = 'Hi, how are you?' liksCount = '5'/>
-                <Post messages = "It's my first post" liksCount = '44'/>
+                {props.posts.map((p) => <Post message = {p.message} liksCount = {p.liksCount}/>)}
             </div>
         </div>
     );
