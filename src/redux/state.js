@@ -1,9 +1,14 @@
+let rerenderEntireTree = () => {
+    console.log("хаха")
+}
+
 let state = {
     profilePage: {
         posts: [
-            {message: 'Hi, how are you?', liksCount: 5},
-            {message: 'It\'s my first post', liksCount: 5}
-        ]
+            {id: 1, message: 'Hi, how are you?', liksCount: 5},
+            {id: 2, message: 'It\'s my first post', liksCount: 5}
+        ],
+        newPostText: "mutable"
     },
 
     dialogPage: {
@@ -54,7 +59,28 @@ let state = {
             {name: "Anton", id: 3}
         ]
     }
+}
 
+window.state = state
+
+export const addPost = () => {
+    let newPost = {
+        id: 3,
+        message: state.profilePage.newPostText,
+        liksCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state);
+    state.profilePage.newPostText = ''
+}
+
+export const updatePost = (newText) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state);
+}
+
+export let subscribe = (observer) => {
+    rerenderEntireTree = observer
 }
 
 export default state;
