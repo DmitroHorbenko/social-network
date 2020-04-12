@@ -1,5 +1,5 @@
 import * as serviceWorker from './serviceWorker';
-import state, {addPost, subscribe, updatePost} from "./redux/state";
+import store from "./redux/state";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
@@ -8,14 +8,16 @@ import React from "react";
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPost={addPost} updatePost={updatePost} />
+            <App state={state}
+                 dispatch={store.dispatch.bind(store)}
+            />
         </BrowserRouter>, document.getElementById('root')
     );
 }
 
-subscribe(rerenderEntireTree)
+rerenderEntireTree(store.getState());
 
-rerenderEntireTree(state);
+store.subscribe(rerenderEntireTree);
 
 
 
