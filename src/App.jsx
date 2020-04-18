@@ -12,15 +12,16 @@ import Settings from "./components/Settings/Settings";
 function App(props) {
 debugger
     return (
-
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar state={props.state.sidebar} />
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs' render={ () => <Dialogs store={props.store} /> }/>
-                    <Route path='/profile' render={ () => <Profile
-                        profilePage={props.state.profilePage}
-                        dispatch={props.dispatch} /> }/>
+                    <Route path='/profile' render={ () =>
+                        <Profile
+                            profilePage={props.state.profilePage}
+                            dispatch={props.dispatch} /> }
+                    />
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
