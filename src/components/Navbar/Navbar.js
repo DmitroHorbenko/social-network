@@ -2,8 +2,10 @@ import React from "react";
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
+import StoreContext from "../../StoreContext";
 
-const Navbar = (props) => {
+const Navbar = () => {
+    debugger
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -24,7 +26,15 @@ const Navbar = (props) => {
             </div>
             <div> ------------------ </div>
             <div>
-                <Sidebar friends={props.state.friends} />
+                <StoreContext.Consumer>
+                    {
+                        store => {
+                            let state = store.getState().sidebar
+                            return <Sidebar friends={ state.friends} />
+                        }
+                    }
+
+                </StoreContext.Consumer>
             </div>
         </nav>
     );
