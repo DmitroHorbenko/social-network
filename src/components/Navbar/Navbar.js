@@ -1,11 +1,11 @@
 import React from "react";
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
-import Sidebar from "./Sidebar/Sidebar";
-import StoreContext from "../../StoreContext";
+// import Sidebar from "./Sidebar/Sidebar";
+// import StoreContext from "../../StoreContext";
 
 const Navbar = () => {
-    debugger
+
     return (
         <nav className={s.nav}>
             <div className={s.item}>
@@ -13,6 +13,9 @@ const Navbar = () => {
             </div>
             <div className={s.item}>
                 <NavLink to="/dialogs" activeClassName={s.activeLink}>Messages</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/users" activeClassName={s.activeLink}>Users</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to="/news" activeClassName={s.activeLink}>News</NavLink>
@@ -25,17 +28,17 @@ const Navbar = () => {
                 <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
             </div>
             <div> ------------------ </div>
-            <div>
-                <StoreContext.Consumer>
-                    {
-                        store => {
-                            let state = store.getState().sidebar
-                            return <Sidebar friends={ state.friends} />
-                        }
-                    }
+            {/*<div>*/}
+            {/*    <StoreContext.Consumer>*/}
+            {/*        {*/}
+            {/*            store => {*/}
+            {/*                let state = store.getState().sidebar*/}
+            {/*                return <Sidebar friends={ state.friends} />*/}
+            {/*            }*/}
+            {/*        }*/}
 
-                </StoreContext.Consumer>
-            </div>
+            {/*    </StoreContext.Consumer>*/}
+            {/*</div>*/}
         </nav>
     );
 }
