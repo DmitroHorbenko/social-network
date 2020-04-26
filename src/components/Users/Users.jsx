@@ -1,72 +1,42 @@
-import React, {Component} from "react";
-import s from './Users.module.css'
-import * as axios from "axios";
-import userPhoto from '../../asset/img/user.jpg'
+import React from "react";
+import s from "./Users.module.css";
+import userPhoto from "../../asset/img/user.jpg";
 
-class Users extends Component {
-    constructor(props) {
-        super(props)
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                props.setUsers(response.data.items)
-            })
+let Users = (props) => {
+    let pageCount = Math.ceil(props.usersCount / props.pageSize);
+    let arrPages = []
+    for (let i=1; i<=pageCount; i++ ) {
+        arrPages.push(i)
     }
+debugger
+    return <div>
+        <div>
+            {arrPages.map( p => {
+                return <span className={ props.currentPage === p && s.SelectedPage}
+                    // on Event to Page number
+                             onClick={ (e) => {props.onPageChanged(p) }}>{' ' + p }</span>
 
-    render() {
-        return (
-            <div className={s.item}>
-                <h3>Users: </h3>
-                {this.props.users.map((u) => {
-                    return (
+            } )}
+        </div>
+        <div>
+
+            {props.users.map((u) => {
+                return (
+                    <div className={s.item}>
                         <div>
-                            <div>
-                                <img src={u.urlAvatar ? u.urlAvatar : userPhoto} alt={'dfasda'}/>
-                                <button>{u.followed ? 'unfollow' : 'follov'}</button>
-                            </div>
-                            <div>
-                                <div>{u.name}</div>
-                                <div>{" u.location.cityName"}</div>
-                            </div>
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto} alt={'dsfd'} />
+                            {u.followed ? <button onClick={() => {props.unfollow(u.id)}}>Unfollow</button> :
+                            <button onClick={() => {props.follow(u.id)}}>Follow</button> }
                         </div>
-                    )
-                })}
-            </div>
-        );
-    }
+                        <div>
+                            <div>{u.name}</div>
+                            <div>{"u.address.city"}</div>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    </div>
 }
 
-// const Users = (props) => {
-//     let gettUsers = () => {
-//         if (props.users.length === 0) {
-//
-//             axios.get('https://social-network.samuraijs.com/api/1.0/users')
-//                 .then(response => {
-//                     props.setUsers(response.data.items)
-//                 })
-//         }
-//     }
-//
-//     return (
-//         <div className={s.item}>
-//             <button onClick={gettUsers} >Get Users</button>
-//             <h3>Users: </h3>
-//             {props.users.map((u) => {
-//                 return (
-//                         <div>
-//                             <div>
-//                                 <img src={u.urlAvatar ? u.urlAvatar : userPhoto } alt={'dfasda'} />
-//                                 <button>{ u.followed ? 'unfollow' : 'follov' }</button>
-//                             </div>
-//                             <div>
-//                                 <div>{ u.name }</div>
-//                                 <div>{" u.location.cityName" }</div>
-//                             </div>
-//                         </div>
-//                     )
-//
-//             })}
-//         </div>
-//     );
-// }
-
-export default Users;
+export default Users
